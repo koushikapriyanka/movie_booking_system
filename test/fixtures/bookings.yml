@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  show_detail: one
+  total: 1.5
+
+two:
+  user: two
+  show_detail: two
+  total: 1.5

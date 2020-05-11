@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Show Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Theatre</th>
+      <th>Movie</th>
+      <th>Date</th>
+      <th>Timing</th>
+      <th>Ticket fee</th>
+      <th>Seats</th>
+      <% if current_user %>
+        <th>Action</th>
+      <%end%>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @show_details.each do |show_detail| %>
+      <tr>
+        <td><%= show_detail.theatre.name %></td>
+        <td><%= show_detail.movie.name %></td>
+        <td><%= show_detail.date %></td>
+        <td><%= show_detail.timing.in_time_zone('Kolkata').strftime("%H:%M") %></td>
+        <td><%= show_detail.ticket_fee %></td>
+        <td><%= @booking_details[show_detail.id][:seats_left] %></td>
+        <% if current_user && @booking_details[show_detail.id][:seats_left].positive?%>
+          <%if show_detail.valid_show?%>
+            <td><%= link_to 'Book', new_booking_path(:show_detail_id => show_detail.id) %></td>
+            <% if @booking_details[show_detail.id][:can_cancel] %>
+              <td><%= link_to 'Cancel', bookings_path %></td>
+            <%end%>
+          <%end%>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

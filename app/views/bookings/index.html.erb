@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bookings</h1>
+
+<%if @bookings.present?%>
+  <table>
+    <thead>
+      <tr>
+        <th>Movie</th>
+        <th>Date</th>
+        <th>Show Timing</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Action time</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= link_to booking.show_detail.movie.name, booking_path(id: booking.id)  %></td>
+          <td><%= booking.show_detail.date %></td>
+          <td><%= booking.show_detail.timing.in_time_zone('Kolkata').strftime("%H:%M") %></td>
+          <td><%= booking.total %></td>
+          <td><%= booking.status&.capitalize %></td>
+          <td><%= booking.created_at.in_time_zone('Kolkata').strftime("%Y-%m-%d %I:%M %p") %></td>
+          <% if (booking.status == 'booked') && (booking.show_detail.valid_show?) %>
+            <td><%= link_to 'Cancel', booking_path(id: booking.id) %></td>
+          <%end%>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+<%else%>
+  <p id="notice">There are no bookings.</p>
+<%end%>

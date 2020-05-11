@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Theatre:</strong>
+  <%= @show_detail.theatre %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @show_detail.movie %>
+</p>
+
+<p>
+  <strong>Timing:</strong>
+  <%= @show_detail.timing %>
+</p>
+
+<p>
+  <strong>Ticket fee:</strong>
+  <%= @show_detail.ticket_fee %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @show_detail.date %>
+</p>
+
+<%= link_to 'Edit', edit_show_detail_path(@show_detail) %> |
+<%= link_to 'Back', show_details_path %>

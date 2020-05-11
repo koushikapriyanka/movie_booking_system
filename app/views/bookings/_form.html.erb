@@ -1,0 +1,35 @@
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :movie_name %>
+    <%= form.label show_detail.movie.name, disabled: true%> 
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :show_detail_id, value: show_detail.id%>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.label show_detail.ticket_fee, disabled: true%>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :total, value: show_detail.ticket_fee%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

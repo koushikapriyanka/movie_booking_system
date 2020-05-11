@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<%= form_with(url: cancel_booking_path, method: "patch") do |form| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this @booking from being saved:</h2>
+
+      <ul>
+      <% @booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :movie_name %>
+    <%= form.label @booking.show_detail.movie.name, disabled: true%> 
+  </div>
+
+  <div class="field">
+    <%= form.label :show_timing %>
+    <%= form.label @booking.show_detail.timing.in_time_zone('Kolkata').strftime("%H:%M"), disabled: true%> 
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :id, value: @booking.id%>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.label @booking.total, disabled: true%>
+  </div>
+
+  <%if (@booking.status == 'booked') && (@booking.show_detail.valid_show?)%>
+    <div class="actions">
+      <%= form.submit 'Cancel'%>
+    </div>
+  <% end %>
+<% end %>

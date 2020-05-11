@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Theatres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Seat limit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @theatres.each do |theatre| %>
+      <tr>
+        <td><%= theatre.name %></td>
+        <td><%= theatre.seat_limit %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
